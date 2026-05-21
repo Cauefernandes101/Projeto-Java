@@ -168,3 +168,155 @@ Atualiza a lista de favoritos exibida na interface buscando os dados do banco de
 getModeloFavoritos()
 
 Retorna o modelo da lista de favoritos utilizado pela interface gráfica.
+
+┌──────────────────────────┐
+│         Usuario          │
+├──────────────────────────┤
+│ - nomeUsuario : String   │
+│ - nome : String          │
+│ - nascimento : int       │
+│ - email : String         │
+│ - senha : String         │
+├──────────────────────────┤
+│ + getNomeUsuario()       │
+│ + getNome()              │
+│ + getNascimento()        │
+│ + getEmail()             │
+│ + getSenha()             │
+│ + setNomeUsuario()       │
+│ + setNome()              │
+│ + setNascimento()        │
+│ + setEmail()             │
+│ + setSenha()             │
+└──────────────────────────┘
+
+
+
+┌──────────────────────────┐
+│      UsuarioLogado       │
+├──────────────────────────┤
+│ - usuarioLogado:String   │
+├──────────────────────────┤
+│ + setUsuarioLogado()     │
+│ + getUsuarioLogado()     │
+│ + encerrarSessao()       │
+└──────────────────────────┘
+
+
+
+┌──────────────────────────┐
+│        Controller        │
+├──────────────────────────┤
+│ - dao : ControllerDAO    │
+│ - view : Streaming       │
+├──────────────────────────┤
+│ + atualizarLista()       │
+│ + getModeloFavoritos()   │
+└──────────────────────────┘
+
+
+
+┌──────────────────────────┐
+│       ControllerDAO      │
+├──────────────────────────┤
+│ - model : UsuarioDAO     │
+│ - view : Streaming       │
+├──────────────────────────┤
+│ + cadastro()             │
+│ + login()                │
+│ + adicionarFavorito()    │
+│ + removerFavoritoC()     │
+│ + limparFavoritos()      │
+│ + buscarFavoritos()      │
+└──────────────────────────┘
+
+
+
+┌──────────────────────────┐
+│        UsuarioDAO        │
+├──────────────────────────┤
+│ - conn : Connection      │
+├──────────────────────────┤
+│ + inserir()              │
+│ + retornarLogin()        │
+│ + inserirFavorito()      │
+│ + retirarFavorito()      │
+│ + buscarFavoritos()      │
+│ + limparFavoritos()      │
+└──────────────────────────┘
+
+
+
+┌──────────────────────────┐
+│         Conexao          │
+├──────────────────────────┤
+│ - conn : Connection      │
+├──────────────────────────┤
+│ + getConnection()        │
+└──────────────────────────┘
+
+
+
+┌──────────────────────────┐
+│         Streaming        │
+├──────────────────────────┤
+│ + getTfNome()            │
+│ + getTfSenha()           │
+│ + getUsuarioLogin()      │
+│ + getSenhaLogin()        │
+│ + setVisible()           │
+└──────────────────────────┘
+
+
+
+================ RELACIONAMENTOS ================
+
+Controller
+     │
+     ├───────────────► Streaming
+     │
+     └───────────────► ControllerDAO
+
+
+ControllerDAO
+     │
+     ├───────────────► UsuarioDAO
+     │
+     ├───────────────► Streaming
+     │
+     └───────────────► Usuario
+
+
+UsuarioDAO
+     │
+     └───────────────► Conexao
+
+
+UsuarioLogado
+     │
+     └───────────────► Controller
+
+     ┌────────────────────────────┐
+│          usuario           │
+├────────────────────────────┤
+│ PK usuario : TEXT          │
+│ nome : TEXT                │
+│ senha : TEXT               │
+│ email : TEXT               │
+│ nascimento : INT           │
+└────────────────────────────┘
+
+
+
+                1
+usuario ─────────────────────── favoritos
+                N
+
+
+
+┌────────────────────────────┐
+│         favoritos          │
+├────────────────────────────┤
+│ FK usuario : TEXT          │
+│ anime : TEXT               │
+└────────────────────────────┘
