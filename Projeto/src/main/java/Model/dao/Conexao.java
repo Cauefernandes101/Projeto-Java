@@ -18,8 +18,8 @@ import java.sql.SQLException;
 public class Conexao {
     public Connection getConnection() throws SQLException{
         //Dotenv dotenv = Dotenv.load();
-        Connection conexao = DriverManager.getConnection( 
-            "jdbc:postgresql://localhost:5432/postgres", "postgres","fei");
+        Connection conexao = DriverManager.getConnection( //"jdbc:postgresql://localhost:5432/postgres", "postgres","fei"
+            "jdbc:postgresql://localhost:5432/Projeto", "postgres","239564941");
                 //dotenv.get("SENHA_DB"));
         System.out.println("Conexão bem sucedida"); 
         return conexao;

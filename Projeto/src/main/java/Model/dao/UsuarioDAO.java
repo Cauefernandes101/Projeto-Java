@@ -11,7 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ *classe que faz a conexão com o banco de dados para realizar os inserts de usuario
+ assim como o controle dos favoritos no banco de dados removendo ou adicionando
  * @author feispcaquino
  */
 public class UsuarioDAO {
@@ -23,6 +24,7 @@ public class UsuarioDAO {
     public Connection getConn() {
         return conn;
     }
+    /metodo que insere no banco de dados o Usuario com construtor definido na classe model
     public void inserir(Usuario usuario) throws SQLException{
         String sql = "INSERT INTO usuario(nome, usuario, senha, email, nascimento)"
                 + "values('"  + usuario.getNome() +"', '" +
@@ -32,15 +34,15 @@ public class UsuarioDAO {
         System.out.println(sql);
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.execute();
-        //conn.close();
+        
     }
-    
+    /pesquisa para ver se o login corresponde com um usuario cadastro no banco de dados
     public boolean retornarLogin(String usuario,String senha) throws SQLException{
         try{        
         getConn();
         String sql = "SELECT usuario,senha FROM usuario";
         PreparedStatement statement =this.conn.prepareStatement(sql);
-        //statement.setString(1,usuario);
+        
         statement.execute();
         ResultSet resultado=statement.getResultSet();
         System.out.println(resultado);
@@ -51,7 +53,7 @@ public class UsuarioDAO {
 
             // Compara os dados digitados com os dados do banco atual
             if (usuarioBanco.equals(usuario) && senhaBanco.equals(senha)) {
-                //this.conn.close();
+                
                 return true;// Usuário encontrado, interrompe o laço de repetição
             }
         }
@@ -65,10 +67,12 @@ public class UsuarioDAO {
         finally {
         // Garante que a conexão feche mesmo se o usuário não for encontrado
         if (this.conn != null && !this.conn.isClosed()) {
-            //this.conn.close();
+            
         }
         }
     }
+    // metodo que inseri o favorito no banco de dados com o usuario chave estrangeira
+    //  e primaria de outra tabela para evitar duplicidade
     public void inserirFavorito(String usuario, String anime) throws SQLException{
         String sql = "INSERT INTO favoritos (usuario, anime)"
                 + "values('"  + usuario +"', '" +
@@ -78,6 +82,7 @@ public class UsuarioDAO {
         statement.execute();
         
     }
+    //retira o favorito do banco de dados
     public void retirarFavorito(String usuario, String anime) throws SQLException{
         String sql = "DELETE FROM favoritos WHERE usuario ="
                +"'" + usuario +"'"+ " AND anime =" +"'"+ anime+ "'";
@@ -87,7 +92,7 @@ public class UsuarioDAO {
         
     }
        
-    
+    // metodo para pegar do banco os favoritos do usuario e apresentar na lista de favoritos para a remoção
     public java.util.List<String> buscarTodosFavoritosM(String usuario) throws SQLException {
         java.util.List<String> lista = new java.util.ArrayList<>();
         String sql = "SELECT anime FROM favoritos WHERE usuario = "+"'"+usuario+"'";
@@ -103,7 +108,7 @@ public class UsuarioDAO {
         System.out.println(lista);
     return lista;
     }
-
+    //limpa todos os favoritos do banco de dados
     public void limparTodosFavoritos(String usuario) throws SQLException { //para tela da aba favoritos
         String sql = "DELETE FROM favoritos WHERE usuario = "+"'"+ usuario+"'";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

@@ -5,7 +5,7 @@
 package Controller;
 
 /**
- *
+ *classe auxiliar para guardar a informação do ususario atualmente logado
  * @author User
  */
 public class UsuarioLogado {

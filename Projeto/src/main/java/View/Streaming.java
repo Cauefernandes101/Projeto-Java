@@ -43,6 +43,8 @@ public class Streaming extends javax.swing.JFrame {
         
         // Inicializa a variável global dao conectando com este JFrame
         this.dao = new ControllerDAO(this,controller);
+        // logo depois o set dao no controller pelo controller dao ja ter sido criado 
+        // conectando as duas classes na mesma instancia usada no view
         this.controller.setDao(this.dao);
         // Configura o comportamento para não fechar a janela automaticamente, para rodar o codigo de limpar o atributo do UsuarioLogado
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -681,7 +683,7 @@ public class Streaming extends javax.swing.JFrame {
         // TODO add your handling code here: voltar para a pesquisa
         jPanel3.setVisible(true);
         jPanel7.setVisible(false);
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         try {
@@ -702,11 +704,7 @@ public class Streaming extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+ 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -717,12 +715,7 @@ public class Streaming extends javax.swing.JFrame {
         }catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             System.err.println("Erro ao configurar o visual do sistema: " + ex.getMessage());
         }
-        /* catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
-        //</editor-fold>
-
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 new Streaming().setVisible(true);

@@ -85,6 +85,7 @@ public class ControllerDAO {
     }
       
     }
+    //retira o favorito na pagina com a descrição do anime
     public void removerFavoritoC(String usuario) throws SQLException {
         
        String animeSelecionado = view.getjList3().getSelectedValue();
@@ -143,6 +144,7 @@ public class ControllerDAO {
         
         
     }
+    // busca os favoritos do model
     public java.util.List<String> buscarTodosFavoritos(String usuario) throws SQLException {
         
         return model.buscarTodosFavoritosM(usuario);

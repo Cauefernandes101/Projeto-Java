@@ -62,8 +62,9 @@ public class Controller {
     }
     
     /**
-     * Retorno do atributo modeloFavoritos
-     * @return lista com favoitos
+     * Retorno do atributo modeloFavoritos e Modelo lista 
+     *         para controlar as
+     * @return 2 listas com favoitos
      */
     public DefaultListModel<String> getModeloFavoritos() {
         return modeloFavoritos;
@@ -72,9 +73,15 @@ public class Controller {
     public DefaultListModel<String> getModeloLista() {
         return modeloLista;
     }
+    /**
+     * Set dao para evitar o erro de 2 constutores com ambos inicializando com o outro
+     */
     public void setDao(ControllerDAO dao) {
         this.dao=dao;
     }
+    /*
+    metodo de filtragem ao selecionar as letras na lista do anime
+    */
     public void filtragem() {
         view.getjTextField2().getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -87,6 +94,10 @@ public class Controller {
             public void changedUpdate(DocumentEvent e) { filtrarAnimes(); } 
         });
     }
+    /*
+    metodo de filtragem especifico feito para evitar repetição de codigo dentro da filtragem 
+    ele define os parametros de procura na view e a logica repetida 
+    */
     public void filtrarAnimes(){
     
         String termoBusca = view.getjTextField2().getText().trim().toLowerCase();
@@ -106,7 +117,7 @@ public class Controller {
     }
     
     /**
-     *
+     *metodo devirado de redefinir para apagar totalmente a lista
      */
     public void redefinirListaCompleta() {
         modeloLista.clear();
@@ -114,7 +125,9 @@ public class Controller {
             modeloLista.addElement(nomeAnime);
         }
     }
-
+/**
+     *metodo para o clique na opção da lista para então abrir a outra janela com a descrição do anime
+     */
     public void controleClique() {
          view.getjList1().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -142,7 +155,8 @@ public class Controller {
         });
 
     }
-
+/*metodo que pega as linhas do arquivo e separa em nome e descrição para então ser usado no metodo que mostra a lista
+ */
     public void carregarDadosDoArquivo() {
         
         String caminhoArquivo = "animes.txt"; 
