@@ -24,7 +24,6 @@ MySQL
 NetBeans
 MVC (Model View Controller)
 
-
 🔹 Model
 Responsável pelos dados.
 
